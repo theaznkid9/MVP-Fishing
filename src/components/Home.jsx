@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Component, useRef} from "react";
 import Select from 'react-select'
 import styled from 'styled-components';
+import homepageVid from '../assets/homepagefishing.mp4'
 
 const OuterContainer = styled.div`
   dispaly: flex;
@@ -71,7 +72,7 @@ const Home = ({navigate}) => {
   }, [theRegion])
 
   const handleClick = (e) => {
-    navigate('/about');
+    navigate('/' + thestate + theRegion);
   }
 
   const handleStateChange = (e) => {
@@ -84,6 +85,7 @@ const Home = ({navigate}) => {
 
   return (
     <OuterContainer>
+      <video src={homepageVid}/>
       <Container>
         <Title>
           Do You Know Your Fish and Regulations?
@@ -101,7 +103,7 @@ const Home = ({navigate}) => {
         </LocDiv>
       </Container>
       <Container>
-        <Button>Let's Go Fishing!</Button>
+        <Button onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
       </Container>
     </OuterContainer>
     )

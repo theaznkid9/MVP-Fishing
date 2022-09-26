@@ -10,6 +10,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
+        test: /\.mp4$/,
+        loader: 'url?limit=10000&mimetype=video/mp4'
+      },
+      {
         test: /\.(jsx|js)$/,
         exclude: /node_modules/,
         loader: "babel-loader"
@@ -17,7 +25,20 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader','css-loader']
-      }
+      },
+      {
+        test: /\.mp4$/,
+        use: [
+            {
+                loader: "file-loader",
+                options: {
+                    name: "homepagefishing.mp4",
+                    outputPath: "assets/"
+                }
+            }
+        ]
+      },
+
     ]
   },
   // [devtool] this is an additional source map that will let the browser know what files are running our code.
