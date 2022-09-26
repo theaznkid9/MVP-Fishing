@@ -19,6 +19,15 @@ client.connect((err) => {
     console.log('connected to ' + client.database + ' as ' + client.user + ' on port ' + client.port);
 });
 
-// client.query(`CREATE TABLE ncfish IF NOT EXISTS`);
+client.query(`CREATE TABLE IF NOT EXISTS ncfish (
+  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
+  name varchar(30) NOT NULL,
+  scientific varchar(40) NOT NULL,
+  sizelimit varchar(40) NOT NULL,
+  baglimit varchar(40) NOT NULL,
+  season varchar(40),
+  photos text ARRAY,
+  aliases text ARRAY
+);`);
 
 module.exports = client;
