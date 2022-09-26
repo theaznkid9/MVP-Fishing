@@ -2,7 +2,7 @@ const {Client, Pool} = require('pg');
 require('dotenv').config();
 
 
-const client = new Pool({
+const client = new Client({
   host: 'localhost',
   user: 'sunjuhwang',
   port: 5432,
@@ -18,5 +18,7 @@ client.connect((err) => {
     }
     console.log('connected to ' + client.database + ' as ' + client.user + ' on port ' + client.port);
 });
+
+// client.query(`CREATE TABLE ncfish IF NOT EXISTS`);
 
 module.exports = client;

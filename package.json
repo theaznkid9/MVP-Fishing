@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode=development",
+    "start": "nodemon ./server/app.js",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open"
   },
