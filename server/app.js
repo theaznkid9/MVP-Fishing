@@ -22,5 +22,11 @@ const server = app.listen(port, () => {
 });
 
 app.get('/NCInshore', (req, res) => {
-  res.sendStatus(200);
+  db.query('select * from ncfish order by random() limit 4;')
+    .then((result) => {
+      res.status(200).json(result.rows)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 });

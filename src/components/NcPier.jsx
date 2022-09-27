@@ -7,6 +7,7 @@ import fish from '../assets/fish.png';
 import line from '../assets/line.png';
 import axios from 'axios';
 import {gsap, TweenMax} from 'gsap';
+import QuestionModal from './QuestionModal.jsx';
 
 const OuterContainer = styled.div`
   position: absolute;
@@ -124,17 +125,21 @@ const Button = styled.button`
   `
 
 const NCPier = ({navigate}) => {
-  const [fishData, setFishData] = useState();
+  const [fishData, setFishData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const poleRef = useRef();
   const fishRef = useRef();
+  const lineRef = useRef();
   const tl = useRef();
   const t2 = useRef();
+  const t3 = useRef();
   const [poleClicked, setPoleClicked] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3000/NCInshore')
       .then((data) => {
         console.log('DATA:', data.data);
+        setFishData(data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -163,8 +168,15 @@ const NCPier = ({navigate}) => {
   }, []);
 
   useEffect(() => {
-    console.log(poleClicked);
+    t3.current = gsap.timeline({
+      paused: true
+    })
+    t3.current.to([lineRef.current], {duration: 2, opacity: 0})
+  }, []);
+
+  useEffect(() => {
     poleClicked ? tl.current.play() : tl.current.reverse();
+    poleClicked ? t3.current.play() : tl.current.reverse();
   }, [poleClicked]);
 
   const handlePoleClick = (e) => {
@@ -174,7 +186,6 @@ const NCPier = ({navigate}) => {
 
   return (
     <OuterOuterContainer>
-
       <Box>
         <Vid type="video/mp4" src={catchVid} autoPlay muted loop>
         </Vid>
@@ -191,7 +202,7 @@ const NCPier = ({navigate}) => {
       <Box2>
         <OuterContainer>
           <ImageContainer2>
-            <Line src={line}></Line>
+            <Line ref={lineRef} src={line}></Line>
           </ImageContainer2>
         </OuterContainer>
       </Box2>
@@ -202,6 +213,7 @@ const NCPier = ({navigate}) => {
           </ImageContainer3>
         </OuterContainer>
       </Box3>
+      {showModal && <QuestionModal fishData={fishData} />}
     </OuterOuterContainer>
     )
 }

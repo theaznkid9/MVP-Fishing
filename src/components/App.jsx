@@ -15,8 +15,8 @@ const App = () => {
   return (
       <div className='App'>
         <Routes>
-          <Route exact path='/' element={<Home navigate={navigate}/>}></Route>
-          {/* <Route exact path='/' element={<NCPier navigate={navigate}/>}></Route> */}
+          {/* <Route exact path='/' element={<Home navigate={navigate}/>}></Route> */}
+          <Route exact path='/' element={<NCPier navigate={navigate}/>}></Route>
           <Route exact path='/NCInshore' element={<NCPier navigate={navigate}/>}></Route>
         </Routes>
       </div>
