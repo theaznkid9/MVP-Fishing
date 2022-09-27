@@ -4,48 +4,84 @@ import styled from 'styled-components';
 import homepageVid from '../assets/homepagefishing.mp4'
 
 const OuterContainer = styled.div`
-  dispaly: flex;
-  margin: 10% 0% 0% 0%;
-  justify-content: center
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`
+
+// const Overlay = styled.div`
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   top: 0;
+//   left: 0;
+//   background-color: rgba(0, 0, 0, 0.3);
+// `
+
+const OuterOuterContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+`
+
+const Vid = styled.video`
+  width: 100%;
+  height 100%;
+  object-fit: cover;
 `
 
 const Container = styled.div`
   display: flex;
-  margin: 5% 10% 5% 10%;
-  justify-content: center
+  width: 100%;
+  margin: 4% 0 4% 0%;
+  justify-content: center;
+`
+const Triple = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 0 2% 0;
 `
 
 const Title = styled.h1`
   font-family: 'Cambria';
   font-size: 40px;
+  text-align: center;
+  margin: 0 0 6% 0;
 `
 
 const Label = styled.div`
   font-family: 'Cambria';
   font-size: 32px;
+  display: flex;
+  justify-content: center;
 `
 
 const StateDiv = styled.div`
   width: 15%;
-  margin-left: 2%;
+  margin-left: 3%;
   font-family: 'Cambria';
   font-size: 24px;
 `
 const LocDiv = styled.div`
   width: 20%;
-  margin-left: 2%;
+  margin-left: 3%;
   font-family: 'Cambria';
   font-size: 24px;
 `
 const Button = styled.button`
   height: auto;
-  width: 30%;
+  width: 20%;
   color: black;
   border: 1px solid gray;
   font-size: 30px;
   padding: 2% 0 2% 0;
   background-color: #E24E0E;
-  margin: 1% 0 0 0;
+  margin: 2% 0 0 0;
   border-radius: 50%;
   &:hover {
     background-color: salmon;
@@ -84,28 +120,32 @@ const Home = ({navigate}) => {
   };
 
   return (
-    <OuterContainer>
-      <video src={homepageVid}/>
-      <Container>
-        <Title>
-          Do You Know Your Fish and Regulations?
-        </Title>
-      </Container>
-      <Container>
-          <Label>
-          Select Your State and Region:
-          </Label>
-        <StateDiv>
-          <Select placeholder='Select Your State' options={options} onChange={(e) => {handleStateChange(e)}}/>
-        </StateDiv>
-        <LocDiv>
-          <Select placeholder='Select Your Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
-        </LocDiv>
-      </Container>
-      <Container>
-        <Button onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
-      </Container>
-    </OuterContainer>
+    <OuterOuterContainer>
+      {/* <Overlay></Overlay> */}
+      <Vid type="video/mp4" src={homepageVid} autoPlay muted loop>
+      </Vid>
+      <OuterContainer>
+        <Container>
+          <Title>
+            Do You Know Your Fish and Regulations?
+          </Title>
+        </Container>
+        <Triple>
+              <Label>
+              Select Your State and Region:
+              </Label>
+            <StateDiv>
+              <Select placeholder='Select Your State' options={options} onChange={(e) => {handleStateChange(e)}}/>
+            </StateDiv>
+            <LocDiv>
+              <Select placeholder='Select Your Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
+            </LocDiv>
+        </Triple>
+        <Container>
+          <Button onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
+        </Container>
+      </OuterContainer>
+    </OuterOuterContainer>
     )
 }
 
