@@ -5,6 +5,7 @@ import catchVid from '../assets/fishingpier.mp4';
 import fishingpole from '../assets/fishingpole.png';
 import fish from '../assets/fish.png';
 import line from '../assets/line.png';
+import axios from 'axios';
 import {gsap, TweenMax} from 'gsap';
 
 const OuterContainer = styled.div`
@@ -123,11 +124,22 @@ const Button = styled.button`
   `
 
 const NCPier = ({navigate}) => {
+  const [fishData, setFishData] = useState();
   const poleRef = useRef();
   const fishRef = useRef();
   const tl = useRef();
   const t2 = useRef();
   const [poleClicked, setPoleClicked] = useState(false);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/NCInshore')
+      .then((data) => {
+        console.log('DATA:', data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, []);
 
   const handleClick = (e) => {
     navigate('/');
@@ -139,8 +151,8 @@ const NCPier = ({navigate}) => {
       repeat: 1,
       repeatDelay: 2,
     })
-    t2.current.to([poleRef.current], {x: "+=4px" , duration: 0.1, repeat: 8, delay: 1});
-    t2.current.to([poleRef.current], {x: "-=4px", duration: 0.1, repeat: 8, delay: 2});
+    t2.current.to([poleRef.current], {x: "+=4px" , duration: 0.1, repeat: 8, delay: 3});
+    t2.current.to([poleRef.current], {x: "-=4px", duration: 0.1, repeat: 8, delay: 3});
   }, []);
 
   useEffect(() => {
@@ -156,7 +168,6 @@ const NCPier = ({navigate}) => {
   }, [poleClicked]);
 
   const handlePoleClick = (e) => {
-    console.log('clicked');
     setPoleClicked(true);
   };
 

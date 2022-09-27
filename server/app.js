@@ -20,3 +20,7 @@ app.use(express.json());
 const server = app.listen(port, () => {
   console.log(`listening on port ${port}`)
 });
+
+app.get('/NCInshore', (req, res) => {
+  res.sendStatus(200);
+});

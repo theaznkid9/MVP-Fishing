@@ -135,7 +135,7 @@ const Home = ({navigate}) => {
               Select Your State and Region:
               </Label>
             <StateDiv>
-              <Select placeholder='Select Your State' options={options} onChange={(e) => {handleStateChange(e)}}/>
+              <Select placeholder='Select Your State' options={options} onChange={(e) => {handleStateChange(e)}} />
             </StateDiv>
             <LocDiv>
               <Select placeholder='Select Your Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
