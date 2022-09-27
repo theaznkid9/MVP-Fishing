@@ -59,6 +59,7 @@ const Line = styled.img`
 `
 
 const OuterOuterContainer = styled.div`
+  position: absolute;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -181,6 +182,9 @@ const NCPier = ({navigate}) => {
 
   const handlePoleClick = (e) => {
     setPoleClicked(true);
+    setTimeout(() => {
+      setShowModal(true);
+    }, 2000)
   };
 
 
@@ -213,7 +217,7 @@ const NCPier = ({navigate}) => {
           </ImageContainer3>
         </OuterContainer>
       </Box3>
-      {showModal && <QuestionModal fishData={fishData} />}
+      {showModal && <QuestionModal fishData={fishData} setShowModal={setShowModal}/>}
     </OuterOuterContainer>
     )
 }
