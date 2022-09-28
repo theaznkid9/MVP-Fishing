@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Component, useRef} from "react";
 import styled from 'styled-components';
-import { Modal, Box, Typography, Card, CardMedia } from '@mui/material';
+import { Modal, Box, Typography, Card, CardMedia, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 
 
 const QuestionModal = ({fishData, setShowModal}) => {
@@ -39,8 +39,49 @@ const QuestionModal = ({fishData, setShowModal}) => {
 
           </Card>
       </Box>
-        <Card sx={{width: 7/15, height: 0.9, mt: 3}}>
-
+        <Card sx={{display: 'flex', flexDirection: 'space-evenly', width: 7/15, height: 0.9, mt: 3}}>
+          <Box sx={{display: 'flex', flexDirection: 'column', border: 1, m: 1}}>
+            <Box sx={{m: 2}}>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Identify the fish!</FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="radio-buttons-group"
+                  >
+                  {nameChoices.map((option, index) => {
+                    return <FormControlLabel value={option} control={<Radio />} label={option}/>
+                  })}
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{m: 2}}>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Identify the fish!</FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="radio-buttons-group"
+                  >
+                  {nameChoices.map((option, index) => {
+                    return <FormControlLabel value={option} control={<Radio />} label={option}/>
+                  })}
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{m: 2}}>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Identify the fish!</FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="radio-buttons-group"
+                  >
+                  {nameChoices.map((option, index) => {
+                    return <FormControlLabel value={option} control={<Radio />} label={option}/>
+                  })}
+                </RadioGroup>
+              </FormControl>
+            </Box>
+          </Box>
+          <Box sx={{border: 1, m: 1}}></Box>
         </Card>
       </Box>
     </Modal>
