@@ -4,6 +4,20 @@ import { Modal, Box, Typography, Card, CardMedia } from '@mui/material';
 
 
 const QuestionModal = ({fishData, setShowModal}) => {
+  const answerNum = Math.floor(Math.random() * 4);
+  const correctName = fishData[answerNum].name;
+  const correctSize = fishData[answerNum].baglimit;
+  const correctLimit = fishData[answerNum].sizelimit;
+  const nameChoices = [];
+  const baglimitChoices = [];
+  const sizelimitChoices = [];
+  for (let i = 0; i < 4; i++) {
+    nameChoices.push(fishData[i].name);
+    baglimitChoices.push(fishData[i].baglimit);
+    sizelimitChoices.push(fishData[i].sizelimit);
+  };
+
+  console.log('CHOICES:', nameChoices, baglimitChoices, sizelimitChoices);
 
   const refreshPage = () => {
     window.location.reload(false);
@@ -11,22 +25,22 @@ const QuestionModal = ({fishData, setShowModal}) => {
 
   return (
     <Modal open={true} onClose={() => {refreshPage()}}>
-      <Box position='absolute' top='10%' left='12.5%' sx={{width: 3/4, height: 4/5, border: 1, borderColor: 'gray', borderRadius: 2, bgcolor: '#E5DFDB'}}>
-        <Card sx={{width: 1/2, height: 0.6, mt: 11, ml: 2}}>
+      <Box position='absolute' top='10%' left='12.5%' sx={{display: 'flex', width: 3/4, height: 4/5, border: 1, borderColor: 'gray', borderRadius: 2, bgcolor: '#E5DFDB'}}>
+      <Box sx={{display: 'flex', flexDirection: 'column', alignContent: 'space-between', width: 5/11, height: 0.9, mt: 3, ml: 4}}>
+        <Card sx={{width: 0.9, height: 0.6}}>
           <CardMedia
             component='img'
-            height='.99'
-            image='https://i0.wp.com/mexican-fish.com/wp-content/uploads/F705-Atlantic-Spadefish-3.jpg?resize=570%2C401&ssl=1'
+            image={fishData[answerNum].photos[Math.floor(Math.random() * 2)]}
             alt='fish'
-          />
-        </Card>
-        <Card sx={{width: 1/2, height: 0.6, mt: 11, ml: 2}}>
-          <CardMedia
-            component='img'
-            height='.99'
-            image='https://i0.wp.com/mexican-fish.com/wp-content/uploads/F705-Atlantic-Spadefish-3.jpg?resize=570%2C401&ssl=1'
-            alt='fish'
-          />
+            sx={{height: 1}}
+            />
+          </Card>
+          <Card sx={{width: 0.9, height: 0.38, mt: 3}}>
+
+          </Card>
+      </Box>
+        <Card sx={{width: 7/15, height: 0.9, mt: 3}}>
+
         </Card>
       </Box>
     </Modal>
