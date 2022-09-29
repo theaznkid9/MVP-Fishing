@@ -85,6 +85,7 @@ const LocDiv = styled.div`
   font-size: 24px;
   transform: translateY(100px);
   opacity: 0;
+  z-index: 3;
   transform-origin: 0% 100%;
 `
 const Button = styled.button`
@@ -124,7 +125,7 @@ const Home = ({navigate}) => {
   states.forEach((state) => {
     options.push({value: state, label: state});
   });
-  const regions = [{value: 'Deep Sea', label: 'Deep Sea'}, {value: 'Inshore', label: 'Inshore'}, {value: 'Piedmont', label: 'Piedmont'}, {value: 'Mountains', label: 'Mountains'} ];
+  let regions = [{value: 'Deep Sea', label: 'Deep Sea'}, {value: 'Inshore', label: 'Inshore'}, {value: 'Piedmont', label: 'Piedmont'}, {value: 'Mountains', label: 'Mountains'}];
 
   useEffect(() => {
     console.log(thestate, theRegion);
@@ -159,7 +160,6 @@ const Home = ({navigate}) => {
 
   return (
     <OuterOuterContainer>
-      {/* <Overlay></Overlay> */}
       <Vid type="video/mp4" src={homepageVid} autoPlay muted loop>
       </Vid>
       <OuterContainer>
