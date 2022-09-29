@@ -39,14 +39,14 @@ const Triple = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: 'Cambria';
+  font-family: 'Copperplate';
   font-size: 40px;
   text-align: center;
   margin: 0 0 6% 0;
 `
 
 const Label = styled.div`
-  font-family: 'Cambria';
+  font-family: 'Copperplate';
   font-size: 32px;
   display: flex;
   justify-content: center;
@@ -55,27 +55,30 @@ const Label = styled.div`
 const StateDiv = styled.div`
   width: 15%;
   margin-left: 3%;
-  font-family: 'Cambria';
   font-size: 24px;
+  font-family: 'Copperplate';
 `
 const LocDiv = styled.div`
   width: 20%;
   margin-left: 3%;
-  font-family: 'Cambria';
+  font-family: 'Copperplate';
   font-size: 24px;
 `
 const Button = styled.button`
   height: auto;
   width: 20%;
-  color: black;
+  color: white;
   border: 1px solid gray;
   font-size: 30px;
+  font-family: 'Copperplate';
   padding: 2% 0 2% 0;
-  background-color: #E24E0E;
+  background-color: black;
+  opacity: 0.65;
   margin: 2% 0 0 0;
-  border-radius: 50%;
+  border-radius: 10%;
   &:hover {
-    background-color: salmon;
+    background-color: black;
+    opacity: .8;
     cursor: pointer;
   };
   &:active {
@@ -126,10 +129,10 @@ const Home = ({navigate}) => {
               Select Your State and Region:
               </Label>
             <StateDiv>
-              <Select placeholder='Select Your State' options={options} onChange={(e) => {handleStateChange(e)}} />
+              <Select placeholder='State' options={options} onChange={(e) => {handleStateChange(e)}} />
             </StateDiv>
             <LocDiv>
-              <Select placeholder='Select Your Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
+              <Select placeholder='Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
             </LocDiv>
         </Triple>
         <Container>

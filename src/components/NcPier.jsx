@@ -113,11 +113,14 @@ const Button = styled.button`
   color: black;
   border: 1px solid gray;
   font-size: 20px;
+  font-family: 'Optima';
   padding: 1% 1% 1% 1%;
-  background-color: silver;
+  opacity: 0.4;
+  background-color: aqua;
   margin: 2% 0 0 0;
   &:hover {
     background-color: aqua;
+    opacity: 0.6;
     cursor: pointer;
   };
   &:active {
@@ -157,8 +160,8 @@ const NCPier = ({navigate}) => {
       repeat: 1,
       repeatDelay: 2,
     })
-    t2.current.to([poleRef.current], {x: "+=4px" , duration: 0.1, repeat: 8, delay: 3});
-    t2.current.to([poleRef.current], {x: "-=4px", duration: 0.1, repeat: 8, delay: 3});
+    t2.current.to([poleRef.current], {x: "+=5px" , duration: 0.1, repeat: 8, delay: 2});
+    t2.current.to([poleRef.current], {x: "-=5px", duration: 0.1, repeat: 8, delay: 2});
   }, []);
 
   useEffect(() => {
@@ -184,7 +187,7 @@ const NCPier = ({navigate}) => {
     setPoleClicked(true);
     setTimeout(() => {
       setShowModal(true);
-    }, 2200)
+    }, 2100)
   };
 
 

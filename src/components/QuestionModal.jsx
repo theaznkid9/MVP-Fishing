@@ -10,8 +10,8 @@ const QuestionModal = ({fishData, setShowModal}) => {
   let sizeNum = useRef((Math.floor(Math.random() * 9) + 8));
   const photoNum = useRef(Math.floor(Math.random() * 2));
   const correctName = fishData[answerNum.current].name;
-  const correctSize = fishData[answerNum.current].baglimit;
-  const correctLimit = fishData[answerNum.current].sizelimit;
+  const correctSize = fishData[answerNum.current].sizelimit;
+  const correctLimit = fishData[answerNum.current].baglimit;
   const [nameGuess, setNameGuess] = useState('');
   const [sizeGuess, setSizeGuess] = useState('');
   const [bagGuess, setBagGuess] = useState('');
@@ -95,7 +95,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
       setSizeCorrect(true);
     }
     if (bagGuess === correctLimit) {
-      setNBagCorrect(true);
+      setBagCorrect(true);
     }
   };
 
@@ -173,7 +173,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
                 <Typography>*FL: Fork Length  &nbsp; &nbsp; &nbsp;  *TL: Tail Length</Typography>
               </Box>
             </Box>
-            <Box sx={{border: 1, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 0.65, width: 0.2}}>
+            <Box sx={{mt: 4.5, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 0.65, width: 0.2}}>
               {submitted && <Result isCorrect={nameCorrect} correctAnswer={correctName}/>}
               {submitted && <Result isCorrect={sizeCorrect} correctAnswer={correctSize}/>}
               {submitted && <Result isCorrect={bagCorrect} correctAnswer={correctLimit}/>}
