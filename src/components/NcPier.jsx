@@ -6,7 +6,7 @@ import fishingpole from '../assets/fishingpole.png';
 import fish from '../assets/fish.png';
 import line from '../assets/line.png';
 import axios from 'axios';
-import {gsap, TweenMax} from 'gsap';
+import {gsap} from 'gsap';
 import QuestionModal from './QuestionModal.jsx';
 
 const OuterContainer = styled.div`
@@ -184,7 +184,7 @@ const NCPier = ({navigate}) => {
     setPoleClicked(true);
     setTimeout(() => {
       setShowModal(true);
-    }, 2000)
+    }, 2200)
   };
 
 
