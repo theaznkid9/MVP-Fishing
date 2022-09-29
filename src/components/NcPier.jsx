@@ -73,7 +73,7 @@ const Vid = styled.video`
   width: 100%;
   height auto%;
   object-fit: cover;
-  border: solid 2px black;
+  border: solid 1px gray;
 `
 
 const Container = styled.div`

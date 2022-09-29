@@ -32,6 +32,17 @@ const Container = styled.div`
   margin: 4% 0 4% 0%;
   justify-content: center;
 `
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 4% 0 4% 0%;
+  justify-content: center;
+  transform: translateY(100px);
+  opacity: 0;
+  transform-origin: 0% 100%;
+`
+
 const Triple = styled.div`
   display: flex;
   justify-content: center;
@@ -62,6 +73,7 @@ const StateDiv = styled.div`
   margin-left: 3%;
   font-size: 24px;
   font-family: 'Copperplate';
+  z-index: 3;
   transform: translateY(100px);
   opacity: 0;
   transform-origin: 0% 100%;
@@ -84,10 +96,8 @@ const Button = styled.button`
   font-family: 'Copperplate';
   padding: 2% 0 2% 0;
   background-color: black;
-  transform: translateY(100px);
-  opacity: 0;
-  transform-origin: 0% 100%;
   margin: 2% 0 0 0;
+  opacity: 0.65;
   border-radius: 10%;
   &:hover {
     background-color: black;
@@ -132,7 +142,7 @@ const Home = ({navigate}) => {
     tl.current.to([labelRef.current], {'clip-path': 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)', opacity: 1, y: 0}, "-=1.8")
     tl.current.to([stateRef.current], {stagger: .1, duration: 1.2, opacity: 1, y: 0}, "-=1.7")
     tl.current.to([regionRef.current], {stagger: .1, duration: 1.2, opacity: 1, y: 0}, "-=1.6")
-    tl.current.to([buttonRef.current], {stagger: .1, duration: 1.2, opacity: 0.65, y: 0}, "-=1.5")
+    tl.current.to([buttonRef.current], {stagger: .1, duration: 1.2, opacity: 1, y: 0}, "-=1.5")
   }, []);
 
   const handleClick = (e) => {
@@ -169,9 +179,9 @@ const Home = ({navigate}) => {
               <Select placeholder='Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
             </LocDiv>
         </Triple>
-        <Container>
-          <Button ref={buttonRef} onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
-        </Container>
+        <ButtonContainer ref={buttonRef} >
+          <Button onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
+        </ButtonContainer>
       </OuterContainer>
     </OuterOuterContainer>
     )
