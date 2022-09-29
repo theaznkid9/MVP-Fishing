@@ -1,7 +1,8 @@
 import React, {useState, useEffect, Component, useRef} from "react";
 import Select from 'react-select'
 import styled from 'styled-components';
-import homepageVid from '../assets/homepagefishing.mp4'
+import homepageVid from '../assets/homepagefishing.mp4';
+import {gsap} from 'gsap';
 
 const OuterContainer = styled.div`
   position: absolute;
@@ -39,6 +40,9 @@ const Triple = styled.div`
 `
 
 const Title = styled.h1`
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  transform: translateY(100px);
+  opacity: 0;
   font-family: 'Copperplate';
   font-size: 40px;
   text-align: center;
@@ -46,6 +50,7 @@ const Title = styled.h1`
 `
 
 const Label = styled.div`
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
   font-family: 'Copperplate';
   font-size: 32px;
   display: flex;
@@ -57,12 +62,18 @@ const StateDiv = styled.div`
   margin-left: 3%;
   font-size: 24px;
   font-family: 'Copperplate';
+  transform: translateY(100px);
+  opacity: 0;
+  transform-origin: 0% 100%;
 `
 const LocDiv = styled.div`
   width: 20%;
   margin-left: 3%;
   font-family: 'Copperplate';
   font-size: 24px;
+  transform: translateY(100px);
+  opacity: 0;
+  transform-origin: 0% 100%;
 `
 const Button = styled.button`
   height: auto;
@@ -73,7 +84,9 @@ const Button = styled.button`
   font-family: 'Copperplate';
   padding: 2% 0 2% 0;
   background-color: black;
-  opacity: 0.65;
+  transform: translateY(100px);
+  opacity: 0;
+  transform-origin: 0% 100%;
   margin: 2% 0 0 0;
   border-radius: 10%;
   &:hover {
@@ -87,6 +100,12 @@ const Button = styled.button`
   `
 
 const Home = ({navigate}) => {
+  const titleRef = useRef();
+  const labelRef = useRef();
+  const stateRef = useRef();
+  const regionRef = useRef();
+  const buttonRef = useRef();
+  const tl = useRef();
   const selectedState = useRef();
   const [thestate, setTheState] = useState('');
   const [theRegion, setTheRegion] = useState('');
@@ -100,6 +119,21 @@ const Home = ({navigate}) => {
   useEffect(() => {
     console.log(thestate, theRegion);
   }, [theRegion])
+
+  useEffect(() => {
+    tl.current = gsap.timeline({
+      paused: false,
+      defaults: {
+        ease: "power4.inOut",
+        duration: 2
+      }
+    })
+    tl.current.to([titleRef.current], {'clip-path': 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)', opacity: 1, y: 0, duration: 2.2})
+    tl.current.to([labelRef.current], {'clip-path': 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)', opacity: 1, y: 0}, "-=1.8")
+    tl.current.to([stateRef.current], {stagger: .1, duration: 1.2, opacity: 1, y: 0}, "-=1.7")
+    tl.current.to([regionRef.current], {stagger: .1, duration: 1.2, opacity: 1, y: 0}, "-=1.6")
+    tl.current.to([buttonRef.current], {stagger: .1, duration: 1.2, opacity: 0.65, y: 0}, "-=1.5")
+  }, []);
 
   const handleClick = (e) => {
     navigate('/' + thestate + theRegion);
@@ -120,23 +154,23 @@ const Home = ({navigate}) => {
       </Vid>
       <OuterContainer>
         <Container>
-          <Title>
+          <Title ref={titleRef}>
             Do You Know Your Fish and Regulations?
           </Title>
         </Container>
         <Triple>
-              <Label>
+              <Label ref={labelRef}>
               Select Your State and Region:
               </Label>
-            <StateDiv>
+            <StateDiv ref={stateRef}>
               <Select placeholder='State' options={options} onChange={(e) => {handleStateChange(e)}} />
             </StateDiv>
-            <LocDiv>
+            <LocDiv ref={regionRef}>
               <Select placeholder='Region' options={regions} onChange={(e) => {handleRegionChange(e)}} isDisabled={(thestate.length > 1) ? false : true}/>
             </LocDiv>
         </Triple>
         <Container>
-          <Button onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
+          <Button ref={buttonRef} onClick={(e) => {handleClick(e)}}>Let's Go Fishing!</Button>
         </Container>
       </OuterContainer>
     </OuterOuterContainer>
