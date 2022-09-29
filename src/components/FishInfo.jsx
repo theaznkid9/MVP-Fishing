@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Text = styled.div`
   font-family: 'Georgia';
   font-size: 16px;
+  padding: 6px;
 `
 
 const FishInfo = ({fishInfo}) => {

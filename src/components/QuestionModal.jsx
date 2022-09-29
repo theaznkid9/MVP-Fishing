@@ -180,7 +180,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
                   </RadioGroup>
                 </FormControl>
               </Box>
-              <Box>
+              <Box >
                 <Button variant='contained' size='medium' sx={{mb: 3}} onClick={(e) => {handleSubmit(e)}}>Submit!</Button>
                 <Typography>*FL: Fork Length  &nbsp; &nbsp; &nbsp;  *TL: Tail Length</Typography>
               </Box>
