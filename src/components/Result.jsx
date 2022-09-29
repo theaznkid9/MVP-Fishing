@@ -12,24 +12,36 @@ const Ex = styled.img`
   width: 40px;
 `
 
+const Text = styled.div`
+  font-family: 'marker felt';
+  font-size: 18px;
+`
+const GreenText = styled.div`
+  font-family: 'marker felt';
+  font-size: 18px;
+  color: green;
+`
+
 const Result = ({isCorrect, correctAnswer}) => {
 
 
   if (isCorrect) {
     return (
-      <div>
+      <Text>
         <Check src={check}/>
         <br></br>
+        <br></br>
         Correct!
-    </div>
+    </Text>
   );
   } else {
     return (
-      <div>
+      <GreenText>
         <Ex src={rex}/>
         <br></br>
-        {correctAnswer}
-      </div>
+        <br></br>
+        Answer: {correctAnswer}
+      </GreenText>
     )
   }
 }

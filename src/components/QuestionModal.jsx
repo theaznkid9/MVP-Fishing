@@ -6,7 +6,7 @@ import _ from 'underscore';
 
 const QuestionModal = ({fishData, setShowModal}) => {
   const answerNum = useRef(Math.floor(Math.random() * 4));
-  let bagNum = useRef(((Math.floor(Math.random() * 6) + 1) * 4));
+  let bagNum = useRef((Math.floor(Math.random() * 20) + 1));
   let sizeNum = useRef((Math.floor(Math.random() * 9) + 8));
   const photoNum = useRef(Math.floor(Math.random() * 2));
   const correctName = fishData[answerNum.current].name;
@@ -32,19 +32,19 @@ const QuestionModal = ({fishData, setShowModal}) => {
   const replaceBagDuplicates = (arr) => {
     let duplicates = toFindDuplicates(arr);
     let temp = bagNum.current;
+    let targetNum = arr.filter((v) => (v === duplicates[0])).length;
     let count = 0;
     for (let i = 0; i < arr.length; i++) {
-      if (count = duplicates.length) {
+      if (count === targetNum - 1) {
         break;
       }
       if (arr[i] === duplicates[0]) {
         arr[i] = temp + ' / Day';
-        temp++;
+        temp = temp + 4;
         count++;
       }
     }
   }
-
 
   const replaceSizeDuplicates = (arr) => {
     let duplicates = toFindDuplicates(arr);
@@ -55,20 +55,19 @@ const QuestionModal = ({fishData, setShowModal}) => {
           break;
         }
         if (arr[i] === duplicates[0]) {
-          arr[i] = temp + '" TL';
-          temp++;
+          arr[i] = temp + '" FL';
+          temp = temp + 2;
           count++;
         }
     }
-    console.log(arr);
   }
 
-  replaceBagDuplicates(baglimitChoices, bagNum);
-  replaceBagDuplicates(baglimitChoices, bagNum);
-  replaceBagDuplicates(baglimitChoices, bagNum);
-  replaceSizeDuplicates(sizelimitChoices, sizeNum);
-  replaceSizeDuplicates(sizelimitChoices, sizeNum);
-  replaceSizeDuplicates(sizelimitChoices, sizeNum);
+  replaceBagDuplicates(baglimitChoices);
+  replaceBagDuplicates(baglimitChoices);
+  replaceBagDuplicates(baglimitChoices);
+  replaceSizeDuplicates(sizelimitChoices);
+  replaceSizeDuplicates(sizelimitChoices);
+  replaceSizeDuplicates(sizelimitChoices);
 
   const refreshPage = () => {
     window.location.reload(false);
@@ -101,7 +100,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
 
   return (
       <Modal open={true} onClose={() => {refreshPage()}}>
-        <Box position='absolute' top='10%' left='12.5%' sx={{display: 'flex', overflow: 'scroll', width: 3/4, height: 4/5, border: 1, borderColor: 'gray', borderRadius: 2, bgcolor: '#E5DFDB'}}>
+        <Box position='absolute' top='10%' left='12.5%' sx={{display: 'flex', width: 3/4, height: 4/5, border: 1, borderColor: 'gray', borderRadius: 2, bgcolor: '#E5DFDB'}}>
         <Box sx={{display: 'flex', flexDirection: 'column', alignContent: 'space-between', width: 7/11, height: 0.9, mt: 3, ml: 4}}>
           <Card sx={{width: 0.9, height: 0.6}}>
             <CardMedia
@@ -142,7 +141,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     name="radio-buttons-group"
-                    sx={{height: 0.5, width: 0.8}}
+                    sx={{height: 0.5, width: 1}}
                     onChange={(e) => handleSizeChange(e)}
                     >
                     {sizelimitChoices.map((option, key) => {
@@ -159,7 +158,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     name="radio-buttons-group"
-                    sx={{height: 0.5, width: 0.8}}
+                    sx={{height: 0.5, width: 1}}
                     onChange={(e) => handleBagChange(e)}
                     >
                     {baglimitChoices.map((option, key) => {
@@ -173,7 +172,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
                 <Typography>*FL: Fork Length  &nbsp; &nbsp; &nbsp;  *TL: Tail Length</Typography>
               </Box>
             </Box>
-            <Box sx={{mt: 4.5, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 0.65, width: 0.2}}>
+            <Box sx={{mt: 7, ml: -5, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 0.65, width: 0.3}}>
               {submitted && <Result isCorrect={nameCorrect} correctAnswer={correctName}/>}
               {submitted && <Result isCorrect={sizeCorrect} correctAnswer={correctSize}/>}
               {submitted && <Result isCorrect={bagCorrect} correctAnswer={correctLimit}/>}

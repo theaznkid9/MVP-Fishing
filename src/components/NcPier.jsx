@@ -114,6 +114,7 @@ const Button = styled.button`
   border: 1px solid gray;
   font-size: 20px;
   font-family: 'Optima';
+  font-weight: bold;
   padding: 1% 1% 1% 1%;
   opacity: 0.4;
   background-color: aqua;
