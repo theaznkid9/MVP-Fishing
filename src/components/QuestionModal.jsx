@@ -2,6 +2,8 @@ import React, {useState, useEffect, Component, useRef} from "react";
 import { Modal, Box, Typography, Card, CardMedia, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button} from '@mui/material';
 import Result from './Result.jsx';
 import _ from 'underscore';
+import FishInfo from './FishInfo.jsx';
+import axios from 'axios';
 
 
 const QuestionModal = ({fishData, setShowModal}) => {
@@ -22,6 +24,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
   const nameChoices = [];
   const baglimitChoices = [];
   const sizelimitChoices = [];
+  const [fishInfo, setFishInfo] = useState([]);
   for (let i = 0; i < 4; i++) {
     nameChoices.push(fishData[i].name);
     baglimitChoices.push(fishData[i].baglimit);
@@ -45,6 +48,16 @@ const QuestionModal = ({fishData, setShowModal}) => {
       }
     }
   }
+
+  useEffect(() => {
+    axios.get(`https://www.fishwatch.gov/api/species/${correctName}`)
+      .then((data) => {
+        setFishInfo(data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const replaceSizeDuplicates = (arr) => {
     let duplicates = toFindDuplicates(arr);
@@ -111,7 +124,7 @@ const QuestionModal = ({fishData, setShowModal}) => {
               />
             </Card>
             <Card sx={{width: 0.9, height: 0.38, mt: 3}}>
-
+              {submitted && <FishInfo fishInfo={fishInfo}/>}
             </Card>
         </Box>
           <Card sx={{display: 'flex', flexDirection: 'space-evenly', width: 4/11, height: 0.9, mt: 3, ml: -7}}>
