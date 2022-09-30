@@ -32,23 +32,6 @@ const QuestionModal = ({fishData, setShowModal}) => {
   };
   const toFindDuplicates = arry => arry.filter((item, index) => arry.indexOf(item) !== index);
 
-  const replaceBagDuplicates = (arr) => {
-    let duplicates = toFindDuplicates(arr);
-    let temp = bagNum.current;
-    let targetNum = arr.filter((v) => (v === duplicates[0])).length;
-    let count = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (count === targetNum - 1) {
-        break;
-      }
-      if (arr[i] === duplicates[0]) {
-        arr[i] = temp + ' / Day';
-        temp = temp + 4;
-        count++;
-      }
-    }
-  }
-
   useEffect(() => {
     axios.get(`https://www.fishwatch.gov/api/species/${correctName}`)
       .then((data) => {
@@ -58,6 +41,22 @@ const QuestionModal = ({fishData, setShowModal}) => {
         console.log(err);
       });
   }, []);
+
+  const replaceBagDuplicates = (arr) => {
+    let duplicates = toFindDuplicates(arr);
+    let temp = bagNum.current;
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (count === duplicates.length) {
+        break;
+      }
+      if (arr[i] === duplicates[0]) {
+        arr[i] = temp + ' / Day';
+        temp = temp + 4;
+        count++;
+      }
+    }
+  }
 
   const replaceSizeDuplicates = (arr) => {
     let duplicates = toFindDuplicates(arr);
